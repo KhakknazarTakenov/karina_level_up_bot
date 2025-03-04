@@ -32,14 +32,15 @@ bot.setMyCommands(commands);
 bot.on("polling_error", err => logMessage("error", "polling_error", err.data.error.message));
 
 bot.onText(/\/start/, async msg => {
+    const instLink = process.env.INSTAGRAM_URL;
     try {
         await bot.sendMessage(msg.chat.id, helloMsg, {
             reply_markup: {
                 inline_keyboard: [
-                    [{text: "💫 Instagram", url: "https://www.instagram.com/karina_kaiir?igsh=MTF4YTJlOXI3dHJ3eQ%3D%3D&utm_source=qr"}],
-                    [{text: "💫 Телеграмм канал", url: "https://t.me/+I9jRi6BI_I81NjVi"}],
+                    [{text: "💫 Instagram", url: `${process.env.INSTAGRAM_LINK}`}],
+                    [{text: "💫 Телеграмм канал", url: `${process.env.MAIN_TGK_LINK}`}],
                     [{text: "💫 Купить миникурс за 15000 тг", callback_data: "mini_course"}],
-                    [{text: "💫 Анкета предзаписи на программу максимум", callback_data: "anketa"}],
+                    [{text: "💫 Анкета предзаписи на программу максимум", url: `${process.env.ANKETA_URL}`}],
                 ]
             },
         });
@@ -48,7 +49,7 @@ bot.onText(/\/start/, async msg => {
                 parse_mode: "HTML",
                 reply_markup: {
                     inline_keyboard: [
-                        [{text: "Whatsapp", url: "https://wa.me/77753399949"}]
+                        [{text: "Whatsapp", url: process.env.WHATSAPP_LINK}]
                     ]
                 }
             });
@@ -73,7 +74,7 @@ bot.on("callback_query", async ctx => {
                     parse_mode: "HTML",
                     reply_markup: {
                         inline_keyboard: [
-                            [{text: "Whatsapp", url: "https://wa.me/77753399949"}]
+                            [{text: "Whatsapp", url: process.env.WHATSAPP_LINK}]
                         ]
                     }
                 })
